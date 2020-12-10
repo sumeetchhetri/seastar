@@ -81,7 +81,7 @@ std::unique_ptr<reply> routes::exception_reply(std::exception_ptr eptr) {
 }
 
 future<std::unique_ptr<reply> > routes::handle(const sstring& path, std::unique_ptr<request> req, std::unique_ptr<reply> rep) {
-    handler_base* rule_handler = get_handler(str2type(req->_method), normalize_url(path), req->param);
+    handler_base* handler = get_handler(str2type(req->_method), normalize_url(path), req->param);
     if (handler != nullptr) {
         try {
             for (auto& i : handler->_mandatory_param) {
